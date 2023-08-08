@@ -1,0 +1,5 @@
+/* Home.css */
+.home-container {
+  min-height: 100vh; /* Set the minimum height to 100% of the viewport height */
+  background-color: #343a40; /* Your desired background color */
+}
