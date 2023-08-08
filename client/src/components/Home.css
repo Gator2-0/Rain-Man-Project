@@ -3,3 +3,18 @@
   min-height: 100vh; /* Set the minimum height to 100% of the viewport height */
   background-color: #343a40; /* Your desired background color */
 }
+
+.rule-container {
+  min-height: 100vh; /* Set the minimum height to 100% of the viewport height */
+  background-color: #343a40; /* Your desired background color */
+  display: flex;
+}
+
+h3{
+  padding-left: 5%;
+}
+
+.flex-column {
+  width: 250px;
+  background-color: rgb(33, 37, 41);
+}
