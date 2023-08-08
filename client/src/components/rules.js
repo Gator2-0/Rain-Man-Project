@@ -1,17 +1,19 @@
 import React from 'react';
-import { Container, Nav } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import './Home.css'; 
 
 const VerticalNavbar = () => {
   return (
-    <Nav className="flex-column">
-      <Nav.Link href="#cards">Card Values</Nav.Link>
-      <Nav.Link href="#objective">Objective</Nav.Link>
-      <Nav.Link href="#gameplay">Gameplay</Nav.Link>
-      <Nav.Link href="#player">Player's Turn</Nav.Link>
-      <Nav.Link href="#dealer">Dealer's Turn</Nav.Link>
-      <Nav.Link href="#winning">Winning and Payouts</Nav.Link>
-    </Nav>
+    <Navbar bg="dark" variant="dark" expand="lg" >
+      <Nav className=" flex-column me-auto">
+        <Nav.Link href="#cards">Card Values</Nav.Link>
+        <Nav.Link href="#objective">Objective</Nav.Link>
+        <Nav.Link href="#gameplay">Gameplay</Nav.Link>
+        <Nav.Link href="#player">Player's Turn</Nav.Link>
+        <Nav.Link href="#dealer">Dealer's Turn</Nav.Link>
+        <Nav.Link href="#winning">Winning and Payouts</Nav.Link>
+      </Nav>
+    </Navbar>
   );
 };
 

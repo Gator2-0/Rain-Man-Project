@@ -1,12 +1,12 @@
 /* Home.css */
 .home-container {
   min-height: 100vh; /* Set the minimum height to 100% of the viewport height */
-  background-color: #343a40; /* Your desired background color */
+  background-color: #343a40; 
 }
 
 .rule-container {
   min-height: 100vh; /* Set the minimum height to 100% of the viewport height */
-  background-color: #343a40; /* Your desired background color */
+  background-color: #343a40; 
   display: flex;
 }
 
@@ -17,4 +17,5 @@ h3{
 .flex-column {
   width: 250px;
   background-color: rgb(33, 37, 41);
+  text-align: center;
 }
