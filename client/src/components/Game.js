@@ -1,7 +1,10 @@
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Button, Container, Row, Col, Modal } from "react-bootstrap";
 import React, { useState } from 'react';
 import createShuffledDeck from './Deck';
 import './Home.css';
+
+
+
 
 const calculateHandValue = (hand) => {
   let value = 0;
@@ -19,6 +22,18 @@ const Game = () => {
   const [deck, setDeck] = useState(createShuffledDeck());
   const [playerHand, setPlayerHand] = useState([]);
   const [dealerHand, setDealerHand] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [gameResult, setGameResult] = useState('');
+
+  const handleShowModal = (result) => {
+    setGameResult(result);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setGameResult('');
+  };
 
   const dealInitialCards = () => {
     setDeck((prevDeck) => {
@@ -39,6 +54,7 @@ const Game = () => {
   
       if (calculateHandValue(newPlayerHand) > 21) {
         // Handle "you lose!" logic here
+        handleShowModal('lost');
         // Show modal or update game state accordingly
         return prevDeck; // Return the updated deck
       }
@@ -49,6 +65,7 @@ const Game = () => {
   
         if (calculateHandValue(newDealerHand) > 21) {
           // Handle "you win!" logic here
+          handleShowModal('win');
           // Show modal or update game state accordingly
           return prevDeck; // Return the updated deck
         }
@@ -70,7 +87,10 @@ const Game = () => {
   
       if (calculateHandValue(newDealerHand) > 21) {
         // Handle "you win!" logic here
+        handleShowModal('win');
         // Show modal or update game state accordingly
+      }else{
+        handleShowModal('lost')
       }
   
       return prevDeck; // Return the updated deck
@@ -106,6 +126,21 @@ const Game = () => {
             ))}
             <Button onClick={stand}>Stand</Button>
             <Button onClick={hit}>Hit</Button>
+
+            {/* Modal */}
+            <Modal show={showModal} onHide={handleCloseModal}>
+              <Modal.Header closeButton>
+                <Modal.Title>Game Result</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {gameResult === 'win' ? 'Congratulations! You won the game.' : 'Sorry, you lost the game.'}
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="primary" onClick={handleCloseModal}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </Col>
           <Col className="stats">
             <h3>Score={calculateHandValue(playerHand)}</h3>
