@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Rules from './components/rules';
 import Home from './components/Home';
+import AR from './components/AR';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path='/' Component={Home}/>
         <Route path='/Rules' Component={Rules}/>
+        <Route path='/AR' Component={AR}/>
       </Routes>
 
     </Router>
