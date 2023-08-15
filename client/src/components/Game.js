@@ -92,7 +92,7 @@ const Game = () => {
               ))}
           </Col>
           <Col className="stats">
-          <button onClick={dealInitialCards}>Deal Initial Cards</button>
+          <Button onClick={dealInitialCards}>Deal Initial Cards</Button>
             <h3>Score={calculateHandValue(dealerHand)}</h3>
           </Col>
 
