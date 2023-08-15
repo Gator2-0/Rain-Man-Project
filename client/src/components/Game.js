@@ -5,14 +5,10 @@ import './Home.css';
 
 const calculateHandValue = (hand) => {
   let value = 0;
-  let numAces = 0;
-  console.log('handvalue='+ hand)
 
   for (const card of hand) {
     value += card.value;
-    if (card.rank === 'A') {
-      numAces++;
-    }
+    
   }
    return value;
 }
@@ -25,15 +21,43 @@ const Game = () => {
   const [dealerHand, setDealerHand] = useState([]);
 
   const dealInitialCards = () => {
-    const playerInitialHand = [deck.pop(), deck.pop()];
-    const dealerInitialHand = [deck.pop(), deck.pop()];
-
-    setPlayerHand(playerInitialHand);
-    setDealerHand(dealerInitialHand);
-    setDeck(deck); // Update the remaining deck
+    setDeck((prevDeck) => {
+      const playerInitialHand = [prevDeck.pop(), prevDeck.pop()];
+      const dealerInitialHand = [prevDeck.pop(), prevDeck.pop()];
+  
+      setPlayerHand(playerInitialHand);
+      setDealerHand(dealerInitialHand);
+      return prevDeck; // Return the updated deck
+    });
   };
 
   // ... Game logic, hit, stand, etc.
+  const hit = () => {
+    setDeck((prevDeck) => {
+      const newPlayerHand = [...playerHand, prevDeck.pop()];
+      setPlayerHand(newPlayerHand);
+  
+      if (calculateHandValue(newPlayerHand) > 21) {
+        // Handle "you lose!" logic here
+        // Show modal or update game state accordingly
+        return prevDeck; // Return the updated deck
+      }
+  
+      while (calculateHandValue(dealerHand) < calculateHandValue(newPlayerHand)) {
+        const newDealerHand = [...dealerHand, prevDeck.pop()];
+        setDealerHand(newDealerHand);
+  
+        if (calculateHandValue(newDealerHand) > 21) {
+          // Handle "you win!" logic here
+          // Show modal or update game state accordingly
+          return prevDeck; // Return the updated deck
+        }
+      }
+  
+      return prevDeck; // Return the updated deck
+    });
+  };
+  
 
 
   return(
@@ -61,7 +85,7 @@ const Game = () => {
               </div>
             ))}
             <Button>Stand</Button>
-            <Button>Hit</Button>
+            <Button onClick={hit}>Hit</Button>
           </Col>
           <Col className="stats">
             <h3>Score={calculateHandValue(playerHand)}</h3>
