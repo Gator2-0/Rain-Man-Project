@@ -3,6 +3,19 @@ import React, { useState } from 'react';
 import createShuffledDeck from './Deck';
 import './Home.css';
 
+const calculateHandValue = (hand) => {
+  let value = 0;
+  let numAces = 0;
+
+  for (const card of hand) {
+    value += card.value;
+    if (card.rank === 'A') {
+      numAces++;
+    }
+  }
+}
+
+
 const Game = () => {
 
   const [deck, setDeck] = useState(createShuffledDeck());
@@ -26,19 +39,30 @@ const Game = () => {
       <Container>
         <Row className="dealer half-height-row">
           <Col className="game">
+            {dealerHand.map((card, index) => (
+                <div key={index}>
+                  {card.rank} of {card.suit} - Value: {card.value}
+                </div>
+              ))}
           </Col>
           <Col className="stats text-light py-5">
-            <h3>Score=</h3>
+          <button onClick={dealInitialCards}>Deal Initial Cards</button>
+            <h3>Score={calculateHandValue(dealerHand)}</h3>
           </Col>
 
         </Row>
         <Row className="player half-height-row">
           <Col className="game">
+            {playerHand.map((card, index) => (
+              <div key={index}>
+                {card.rank} of {card.suit} - Value: {card.value}
+              </div>
+            ))}
             <Button>Stand</Button>
             <Button>Hit</Button>
           </Col>
           <Col className="stats text-light py-5">
-            <h3>Score=</h3>
+            <h3>Score={calculateHandValue(playerHand)}</h3>
           </Col>
 
           
