@@ -6,6 +6,7 @@ import './Home.css';
 const calculateHandValue = (hand) => {
   let value = 0;
   let numAces = 0;
+  console.log('handvalue='+ hand)
 
   for (const card of hand) {
     value += card.value;
@@ -13,6 +14,7 @@ const calculateHandValue = (hand) => {
       numAces++;
     }
   }
+   return value;
 }
 
 
@@ -37,7 +39,7 @@ const Game = () => {
   return(
     <div className="home-container">
       <Container>
-        <Row className="dealer half-height-row">
+        <Row className="dealer half-height-row text-light py-5">
           <Col className="game">
             {dealerHand.map((card, index) => (
                 <div key={index}>
@@ -45,13 +47,13 @@ const Game = () => {
                 </div>
               ))}
           </Col>
-          <Col className="stats text-light py-5">
+          <Col className="stats">
           <button onClick={dealInitialCards}>Deal Initial Cards</button>
             <h3>Score={calculateHandValue(dealerHand)}</h3>
           </Col>
 
         </Row>
-        <Row className="player half-height-row">
+        <Row className="player half-height-row text-light py-5">
           <Col className="game">
             {playerHand.map((card, index) => (
               <div key={index}>
@@ -61,7 +63,7 @@ const Game = () => {
             <Button>Stand</Button>
             <Button>Hit</Button>
           </Col>
-          <Col className="stats text-light py-5">
+          <Col className="stats">
             <h3>Score={calculateHandValue(playerHand)}</h3>
           </Col>
 
