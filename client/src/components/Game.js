@@ -60,19 +60,23 @@ const Game = () => {
 
   const stand = () => {
     setDeck((prevDeck) => {
-      while (calculateHandValue(dealerHand) < calculateHandValue(playerHand)) {
-        const newDealerHand = [...dealerHand, prevDeck.pop()];
-        setDealerHand(newDealerHand);
+      let newDealerHand = [...dealerHand]; // Create a copy of dealerHand to update
   
-        if (calculateHandValue(newDealerHand) > 21) {
-          // Handle "you win!" logic here
-          // Show modal or update game state accordingly
-          return prevDeck; // Return the updated deck
-        }
+      while (calculateHandValue(newDealerHand) < 17) {
+        newDealerHand = [...newDealerHand, prevDeck.pop()];
       }
-    })
-    
-  }
+  
+      setDealerHand(newDealerHand);
+  
+      if (calculateHandValue(newDealerHand) > 21) {
+        // Handle "you win!" logic here
+        // Show modal or update game state accordingly
+      }
+  
+      return prevDeck; // Return the updated deck
+    });
+  };
+  
   
 
 
