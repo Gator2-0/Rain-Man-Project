@@ -57,6 +57,22 @@ const Game = () => {
       return prevDeck; // Return the updated deck
     });
   };
+
+  const stand = () => {
+    setDeck((prevDeck) => {
+      while (calculateHandValue(dealerHand) < calculateHandValue(playerHand)) {
+        const newDealerHand = [...dealerHand, prevDeck.pop()];
+        setDealerHand(newDealerHand);
+  
+        if (calculateHandValue(newDealerHand) > 21) {
+          // Handle "you win!" logic here
+          // Show modal or update game state accordingly
+          return prevDeck; // Return the updated deck
+        }
+      }
+    })
+    
+  }
   
 
 
@@ -84,7 +100,7 @@ const Game = () => {
                 {card.rank} of {card.suit} - Value: {card.value}
               </div>
             ))}
-            <Button>Stand</Button>
+            <Button onClick={stand}>Stand</Button>
             <Button onClick={hit}>Hit</Button>
           </Col>
           <Col className="stats">
