@@ -33,6 +33,9 @@ const Game = () => {
   const handleCloseModal = () => {
     setShowModal(false);
     setGameResult('');
+    setDeck(createShuffledDeck()); // Reset the deck
+    setPlayerHand([]); // Reset the player's hand
+    setDealerHand([]); // Reset the dealer's hand
   };
 
   const dealInitialCards = () => {
