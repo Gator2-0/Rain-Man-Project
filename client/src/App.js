@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Rules from './components/rules';
 import Home from './components/Home';
 import AR from './components/AR';
+import Game from './components/Game';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' Component={Home}/>
         <Route path='/Rules' Component={Rules}/>
         <Route path='/AR' Component={AR}/>
+        <Route path='/Game' Component={Game}/>
       </Routes>
 
     </Router>
