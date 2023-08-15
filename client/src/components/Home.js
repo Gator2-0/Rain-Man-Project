@@ -15,7 +15,7 @@ const Home = () => {
             <ul>
               <li>Simple game let's you play a BlackJack game, help you make the right decision</li>
               <li>User-input game let's you tell us what card have been dealt in your game</li>
-              <li>AR... You get it, like Iron-Man super sunnies!!!</li>
+              <li>AR... Really just a marketing stunt!!</li>
             </ul>
         </h3>
       </Container>
