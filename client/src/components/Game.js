@@ -1,6 +1,7 @@
 import { Button, Container, Row, Col, Modal } from "react-bootstrap";
 import React, { useState } from 'react';
 import createShuffledDeck from './Deck';
+import Card from "./Card";
 import './Home.css';
 
 
@@ -108,11 +109,12 @@ const Game = () => {
       <Container>
         <Row className="dealer half-height-row text-light py-5">
           <Col className="game">
-            {dealerHand.map((card, index) => (
-                <div key={index}>
-                  {card.rank} of {card.suit} - Value: {card.value}
-                </div>
+            <Row>
+              {dealerHand.map((card, index) => (
+                <Card key={index} rank={card.rank} suit={card.suit} value={card.value} />
               ))}
+            </Row>
+            
           </Col>
           <Col className="stats">
           <Button onClick={dealInitialCards}>Deal Initial Cards</Button>
@@ -122,13 +124,17 @@ const Game = () => {
         </Row>
         <Row className="player half-height-row text-light py-5">
           <Col className="game">
-            {playerHand.map((card, index) => (
-              <div key={index}>
-                {card.rank} of {card.suit} - Value: {card.value}
-              </div>
-            ))}
-            <Button onClick={stand}>Stand</Button>
-            <Button onClick={hit}>Hit</Button>
+            <Row>
+              {playerHand.map((card, index) => (
+                <Card key={index} rank={card.rank} suit={card.suit} value={card.value} />
+              ))}
+            </Row>
+            <Row>
+              <Button onClick={stand}>Stand</Button>
+              <Button onClick={hit}>Hit</Button>
+            </Row>
+            
+            
 
             {/* Modal */}
             <Modal show={showModal} onHide={handleCloseModal}>
