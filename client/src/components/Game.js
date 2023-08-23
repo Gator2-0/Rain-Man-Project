@@ -5,8 +5,6 @@ import Card from "./Card";
 import './Home.css';
 
 
-
-
 const calculateHandValue = (hand) => {
   let value = 0;
 
@@ -17,7 +15,7 @@ const calculateHandValue = (hand) => {
    return value;
 }
 
-
+//Main
 const Game = () => {
 
   const [deck, setDeck] = useState(createShuffledDeck());
@@ -39,6 +37,8 @@ const Game = () => {
     setDealerHand([]); // Reset the dealer's hand
   };
 
+  //to set the initial hands for both player and dealer
+  //TODO - need to add a timer to slow down card reveal
   const dealInitialCards = () => {
     setDeck((prevDeck) => {
       const playerInitialHand = [prevDeck.pop(), prevDeck.pop()];
@@ -133,7 +133,6 @@ const Game = () => {
               <Button onClick={stand}>Stand</Button>
               <Button onClick={hit}>Hit</Button>
             </Row>
-            
             
 
             {/* Modal */}
