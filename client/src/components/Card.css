@@ -1,3 +1,4 @@
+/* Card component styling*/
 .card {
   border: 1px solid #000;
   width: 100px;
@@ -12,15 +13,22 @@
   margin: 10px;
 }
 
+
 .rank{
-  font-size: 50px;
+  font-size: 25px;
   position: absolute;
+}
+
+.top{
   top: 0px;
   left: 5px;
   margin: 0px;
 }
 
 .bottom{
+  right: 5px;
+  bottom: 0px;
+  margin: 0px;
   transform: rotate(180deg);
 }
 
