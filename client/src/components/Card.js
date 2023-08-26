@@ -39,16 +39,18 @@ const Card = ({ rank, suit, value }) => {
       <h1 className='rank top'>
         {rank}
       </h1>
-      <SuitIcon
+      <SuitIcon 
+        className="suit-Icon"
         suit={suit}
         style={{
           fontSize: "25px",
           position: "absolute",
           margin: "0px",
-          top: "75px",
-          left: "100px",
+          top: "58px",
+          left: "38px",
           color: suitColor,
         }}
+        
       />
       <h1 className='rank bottom'>
         {rank}
