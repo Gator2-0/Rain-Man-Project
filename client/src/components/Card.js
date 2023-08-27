@@ -30,46 +30,47 @@ const Card = ({ rank, suit, value, isFaceUp }) => {
 
   const [suitColor, setSuitColor] = useState(""); // Define suitColor state 
   useEffect(() => {
-    suit === "Hearts" || suit === "Diamonds"
+    suit === "hearts" || suit === "diamonds"
       ? setSuitColor("red")
       : setSuitColor("black");
   }, [suit]); 
 
+  if(!isFaceUp){
+    return (
+      <div className='card'>
+        <img
+            src={CardBack} // Specify the image path
+            alt="Card back image"
+            style={{
+              width: "100%", // Adjust dimensions as needed
+              height: "100%",
+            }}
+          />
+      </div>
+    )
+  }
   return(
-    <div className="card">
-      <h1 className='rank top'>
-        {rank}
-      </h1>
-      {!isFaceUp && ( // Conditionally render the back of the card
-        <div
-          style={{
-            width: "216px",
-            height: "312px",
-            margin: "10px",
-            border: "2px solid red",
-            borderRadius: "12px",
-            backgroundImage: `url(${CardBack})`,
-          }}
-        ></div>
-      )}
-      {isFaceUp && ( // Conditionally render the front of the card
-        <SuitIcon
-          className="suitIcon"
-          suit={suit}
-          style={{
-            fontSize: "25px",
-            position: "absolute",
-            margin: "0px",
-            top: "75px",
-            left: "100px",
-            color: suitColor,
-          }}
-        />
-      )}
-      <h1 className='rank bottom'>
-        {rank}
-      </h1>
-    </div>
+   
+        <div className="card">
+          <h1 className='rank top'>
+            {rank}
+          </h1>
+          <SuitIcon
+            className="suitIcon"
+            suit={suit}
+            style={{
+              fontSize: "25px",
+              position: "absolute",
+              margin: "0px",
+              top: "60px",
+              left: "38px",
+              color: suitColor,
+            }}
+          />  
+          <h1 className='rank bottom'>
+            {rank}
+          </h1>
+        </div>
   )
 }
 

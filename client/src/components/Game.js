@@ -126,7 +126,7 @@ const Game = () => {
           <Col className="game">
             <Row>
               {playerHand.map((card, index) => (
-                <Card key={index} rank={card.rank} suit={card.suit} value={card.value} />
+                <Card key={index} rank={card.rank} suit={card.suit} value={card.value} isFaceUp={true} />
               ))}
             </Row>
             <Row>
