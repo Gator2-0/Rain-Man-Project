@@ -1,15 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 import {
   BsFillSuitHeartFill,
-  BsFillSuitDiamondFill,
-  BsFillSuitSpadeFill,
   BsFillSuitClubFill,
-} from 'react-icons/bs';
-import { GiCardJoker } from 'react-icons/gi';
-import CardBack from '../images/card-back.png';
-import './Card.css';
-
- 
+  BsFillSuitSpadeFill,
+  BsFillSuitDiamondFill,
+} from "react-icons/bs";
+import { GiCardJoker } from "react-icons/gi";
+import CardBack from "../images/card-back.png";
 
 function SuitIcon({ suit, style }) {
   if (suit === "hearts") {
@@ -26,15 +23,10 @@ function SuitIcon({ suit, style }) {
   }
 }
 
-const Card = ({ rank, suit, value, isFaceUp }) => {
-
+function PlayingCard({ suit, rank , value }) {
   const myRef = useRef(null);
-  const [suitColor, setSuitColor] = useState(""); // Define suitColor state 
-  useEffect(() => {
-    suit === "hearts" || suit === "diamonds"
-      ? setSuitColor("red")
-      : setSuitColor("black");
-  }, [suit]); 
+  const iconSize = "40px";
+  const [suitColor, setSuitColor] = useState("red");
 
   function flipCard() {
     if (myRef.current.style.transform) {
@@ -44,63 +36,87 @@ const Card = ({ rank, suit, value, isFaceUp }) => {
     }
   }
 
-  return(
-    
-        <div className='card' 
-          ref={myRef}
-          onClick={flipCard}>
+  useEffect(() => {
+    suit === "hearts" || suit === "diamonds"
+      ? setSuitColor("red")
+      : setSuitColor("black");
+  }, [suit]);
 
-          <div
-              className="card-inner"
-              style={{
-                width: '100%',
-                height: '100%',
-                transformStyle: 'preserve-3d',
-                transition: 'transform 0.5s', // Add transition for smoother animation
-                transform: 'rotateY(180deg)',
-              }}
-            >
-              <div style={{ backfaceVisibility: "hidden" }}>
-                <h1 className='rank top'>
-                  {rank}
-                </h1>
-                <SuitIcon
-                  className="suitIcon"
-                  suit={suit}
-                  style={{
-                    fontSize: "25px",
-                    position: "absolute",
-                    margin: "0px",
-                    top: "60px",
-                    left: "30px",
-                    color: suitColor,
-                  }}
-                />  
-                <h1 className='rank bottom'>
-                  {rank}
-                </h1>
-              </div>
-
-              <div
-                style={{
-                  backfaceVisibility: "hidden",
-                  transform: "rotateY(180deg)",
-                }}
-              >
-                <img
-                  src={CardBack} // Specify the image path
-                  alt="Card back"
-                  style={{
-                    width: "100%", // Adjust dimensions as needed
-                    height: "100%",
-                  }}
-                />
-              </div>
-            </div>
-
-        </div>
-  )
+  return (
+    <div
+      ref={myRef}
+      onClick={flipCard}
+      style={{
+        transformStyle: "preserve-3d",
+        transition: "transform 0.5s ease",
+        transform: "rotateY(180deg)",
+        width: "100px",
+        height: "150px",
+        margin: "10px",
+        padding:"0",
+        border: "2px solid transparent",
+        position: "relative",
+        backgroundColor: "#F2F2F2",
+        borderRadius: "10px",
+        boxShadow:
+          "3px 3px 3px rgba(0,0,0,0.2), 8px 8px 10px rgba(0,0,0,0.2), 0px 0px 20px rgba(0,0,0,0.5)",
+      }}
+    >
+      <div style={{ backfaceVisibility: "hidden" }}>
+        <h1
+          style={{
+            fontSize: "20px",
+            color: suitColor,
+            position: "absolute",
+            top: "0px",
+            left: "5px",
+            margin: "0px",
+          }}
+        >
+          {rank}
+        </h1>
+        <SuitIcon
+          suit={suit}
+          style={{
+            fontSize: iconSize,
+            position: "absolute",
+            margin: "0px",
+            top: "50px",
+            left: "30px",
+            color: suitColor,
+          }}
+        />
+        <h1
+          style={{
+            fontSize: "20px",
+            color: suitColor,
+            position: "absolute",
+            right: "5px",
+            bottom: "0px",
+            margin: "0px",
+            transform: "rotate(180deg)",
+          }}
+        >
+          {rank}
+        </h1>  
+      </div>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          padding:"0",
+          border: "2px solid transparent",
+          borderRadius: "10px",
+          backgroundImage: "url(" + CardBack + ")",
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat', // Prevent background image repetition
+          backgroundPosition: 'center',
+          backfaceVisibility: "hidden",
+          transform: "rotateY(180deg)",
+        }}
+      ></div>
+    </div>
+  );
 }
 
-
-export default Card;
+export default PlayingCard;
