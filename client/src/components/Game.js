@@ -9,10 +9,10 @@ const calculateHandValue = (hand) => {
   let value = 0;
 
   for (const card of hand) {
-    // if(card.isFaceUp){
-    //   value += card.value;
-    // }
-    value += card.value;
+    if(card.isFaceUp){
+      value += card.value;
+    }
+    
   }
    return value;
 }
@@ -35,12 +35,22 @@ const Game = () => {
       setPlayerCardFaceUp((prevStates) => {
         const newStates = [...prevStates];
         newStates[index] = !newStates[index];
+        setPlayerHand((prevPlayerHand) => {
+          const newPlayerHand = [...prevPlayerHand];
+          newPlayerHand[index].isFaceUp = newStates[index];
+          return newPlayerHand;
+        });
         return newStates;
       });
     } else {
       setDealerCardFaceUp((prevStates) => {
         const newStates = [...prevStates];
         newStates[index] = !newStates[index];
+        setDealerHand((prevDealerHand) =>{
+          const newDealerHand = [...prevDealerHand];
+          newDealerHand[index].isFaceUp = newStates[index];
+          return newDealerHand;
+        })
         return newStates;
       });
     }
@@ -65,12 +75,12 @@ const Game = () => {
     setDeck((prevDeck) => {
       const newDeck = [...prevDeck]; // Create a copy of the deck
       const playerInitialHand = [
-        { ...newDeck.pop(), isFaceUp: true },
-        { ...newDeck.pop(), isFaceUp: true },
+        { ...newDeck.pop()},
+        { ...newDeck.pop()},
       ];
       const dealerInitialHand = [
-        { ...newDeck.pop(), isFaceUp: true },
-        { ...newDeck.pop(), isFaceUp: false }, // Dealer's second card is face down
+        { ...newDeck.pop()},
+        { ...newDeck.pop()}, // Dealer's second card is face down
       ];
   
       setPlayerHand(playerInitialHand);
