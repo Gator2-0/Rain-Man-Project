@@ -9,7 +9,10 @@ const calculateHandValue = (hand) => {
   let value = 0;
 
   for (const card of hand) {
-    value += card.value;
+    if(card.isFaceUp){
+      value += card.value;
+    }
+    
     
   }
    return value;
@@ -41,14 +44,23 @@ const Game = () => {
   //TODO - need to add a timer to slow down card reveal
   const dealInitialCards = () => {
     setDeck((prevDeck) => {
-      const playerInitialHand = [prevDeck.pop(), prevDeck.pop()];
-      const dealerInitialHand = [prevDeck.pop(), prevDeck.pop()];
+      const newDeck = [...prevDeck]; // Create a copy of the deck
+      const playerInitialHand = [
+        { ...newDeck.pop(), isFaceUp: true },
+        { ...newDeck.pop(), isFaceUp: true },
+      ];
+      const dealerInitialHand = [
+        { ...newDeck.pop(), isFaceUp: true },
+        { ...newDeck.pop(), isFaceUp: false }, // Dealer's second card is face down
+      ];
   
       setPlayerHand(playerInitialHand);
       setDealerHand(dealerInitialHand);
-      return prevDeck; // Return the updated deck
+      
+      return newDeck; // Return the updated deck
     });
   };
+  
 
   // ... Game logic, hit, stand, etc.
   const hit = () => {

@@ -24,17 +24,18 @@ function SuitIcon({ suit, style }) {
 }
 
 function PlayingCard({ suit, rank , value }) {
+  const [isFaceUp, setIsFaceUp] = useState(false);
   const myRef = useRef(null);
   const iconSize = "40px";
   const [suitColor, setSuitColor] = useState("red");
 
   function flipCard() {
-    if (myRef.current.style.transform) {
-      myRef.current.style.transform = "";
-    } else {
-      myRef.current.style.transform = "rotateY(180deg)";
-    }
+    console.log(rank);
+    console.log('isFaceUp: ' + isFaceUp);
+    setIsFaceUp(!isFaceUp);
+    console.log('isFaceUp: ' + !isFaceUp); // Use !isFaceUp to log the updated value
   }
+  
 
   useEffect(() => {
     suit === "hearts" || suit === "diamonds"
@@ -49,7 +50,7 @@ function PlayingCard({ suit, rank , value }) {
       style={{
         transformStyle: "preserve-3d",
         transition: "transform 0.5s ease",
-        transform: "rotateY(180deg)",
+        transform: isFaceUp ? "none" : "rotateY(180deg)" ,
         width: "100px",
         height: "150px",
         margin: "10px",
