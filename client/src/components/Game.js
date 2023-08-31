@@ -78,6 +78,7 @@ const Game = () => {
         { ...newDeck.pop()},
         { ...newDeck.pop()},
       ];
+      
       const dealerInitialHand = [
         { ...newDeck.pop()},
         { ...newDeck.pop()}, // Dealer's second card is face down
@@ -123,7 +124,7 @@ const Game = () => {
   const stand = () => {
     setDeck((prevDeck) => {
       let newDealerHand = [...dealerHand]; // Create a copy of dealerHand to update
-  
+      //TODO - flip last card up beofre calculating 
       while (calculateHandValue(newDealerHand) < 17) {
         newDealerHand = [...newDealerHand, prevDeck.pop()];
       }
