@@ -145,8 +145,8 @@ const Game = () => {
               {dealerHand.map((card, index) => (
                <Card
                 key={index}
-                isFaceUp={playerCardFaceUp[index]}
-                setIsFaceUp={() => toggleCardFaceUp(index, true)}
+                isFaceUp={dealerCardFaceUp[index]}
+                setIsFaceUp={() => toggleCardFaceUp(index, false)}
                 rank={card.rank}
                 suit={card.suit}
                 value={card.value}
@@ -168,12 +168,12 @@ const Game = () => {
               {playerHand.map((card, index) => (
                 <Card
                   key={index}
-                  isFaceUp={dealerCardFaceUp[index]}
-                  setIsFaceUp={() => toggleCardFaceUp(index, false)}
+                  isFaceUp={playerCardFaceUp[index]}
+                  setIsFaceUp={() => toggleCardFaceUp(index, true)}
                   rank={card.rank}
                   suit={card.suit}
                   value={card.value}
-                />
+              />
               ))}
             </Row>
             <Row>
