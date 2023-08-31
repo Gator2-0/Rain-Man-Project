@@ -9,11 +9,10 @@ const calculateHandValue = (hand) => {
   let value = 0;
 
   for (const card of hand) {
-    if(card.isFaceUp){
-      value += card.value;
-    }
-    
-    
+    // if(card.isFaceUp){
+    //   value += card.value;
+    // }
+    value += card.value;
   }
    return value;
 }
@@ -21,11 +20,31 @@ const calculateHandValue = (hand) => {
 //Main
 const Game = () => {
 
+  const [isFaceUp, setIsFaceUp] = useState(true);
+  const [playerCardFaceUp, setPlayerCardFaceUp] = useState([]);
+  const [dealerCardFaceUp, setDealerCardFaceUp] = useState([]);
   const [deck, setDeck] = useState(createShuffledDeck());
   const [playerHand, setPlayerHand] = useState([]);
   const [dealerHand, setDealerHand] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [gameResult, setGameResult] = useState('');
+
+  // Function to toggle the face-up state of a player's card
+  const toggleCardFaceUp = (index, isPlayer) => {
+    if (isPlayer) {
+      setPlayerCardFaceUp((prevStates) => {
+        const newStates = [...prevStates];
+        newStates[index] = !newStates[index];
+        return newStates;
+      });
+    } else {
+      setDealerCardFaceUp((prevStates) => {
+        const newStates = [...prevStates];
+        newStates[index] = !newStates[index];
+        return newStates;
+      });
+    }
+  };
 
   const handleShowModal = (result) => {
     setGameResult(result);
@@ -121,9 +140,17 @@ const Game = () => {
       <Container>
         <Row className="dealer half-height-row text-light py-5">
           <Col className="game">
+            Dealer
             <Row>
               {dealerHand.map((card, index) => (
-                <Card key={index} rank={card.rank} suit={card.suit} value={card.value} />
+               <Card
+                key={index}
+                isFaceUp={playerCardFaceUp[index]}
+                setIsFaceUp={() => toggleCardFaceUp(index, true)}
+                rank={card.rank}
+                suit={card.suit}
+                value={card.value}
+             />
               ))}
             </Row>
             
@@ -136,9 +163,17 @@ const Game = () => {
         </Row>
         <Row className="player half-height-row text-light py-5">
           <Col className="game">
+            Player
             <Row>
               {playerHand.map((card, index) => (
-                <Card key={index} rank={card.rank} suit={card.suit} value={card.value} isFaceUp={true} />
+                <Card
+                  key={index}
+                  isFaceUp={dealerCardFaceUp[index]}
+                  setIsFaceUp={() => toggleCardFaceUp(index, false)}
+                  rank={card.rank}
+                  suit={card.suit}
+                  value={card.value}
+                />
               ))}
             </Row>
             <Row>

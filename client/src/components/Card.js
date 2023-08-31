@@ -23,8 +23,8 @@ function SuitIcon({ suit, style }) {
   }
 }
 
-function PlayingCard({ suit, rank , value }) {
-  const [isFaceUp, setIsFaceUp] = useState(false);
+function PlayingCard({ suit, rank , value, isFaceUp, setIsFaceUp  }) {
+  //const [isFaceUp, setIsFaceUp] = useState(false); now handled in the game.js file
   const myRef = useRef(null);
   const iconSize = "40px";
   const [suitColor, setSuitColor] = useState("red");
