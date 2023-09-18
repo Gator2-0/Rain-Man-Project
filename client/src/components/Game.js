@@ -105,11 +105,11 @@ const Game = () => {
         return prevDeck; // Return the updated deck
       }
   
-      while (calculateHandValue(dealerHand) < calculateHandValue(newPlayerHand)) {
+      while (calculateHandValue(dealerHand) < calculateHandValue(newPlayerHand) ||calculateHandValue(dealerHand) > 17) {
         const newDealerHand = [...dealerHand, prevDeck.pop()];
         setDealerHand(newDealerHand);
   
-        if (calculateHandValue(newDealerHand) > 21) {
+        if (calculateHandValue(newDealerHand) > 21 || calculateHandValue(dealerHand)  ) {
           // Handle "you win!" logic here
           handleShowModal('win');
           // Show modal or update game state accordingly
@@ -142,6 +142,7 @@ const Game = () => {
       return prevDeck; // Return the updated deck
     });
   };
+
   
   
 
